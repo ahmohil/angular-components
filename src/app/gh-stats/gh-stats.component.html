@@ -1,0 +1,39 @@
+<div class="card">
+  <div class="card-header">
+    <img
+      [src]="github_data.avatar_url"
+      alt="{{ github_data.login }}"
+      class="avatar"
+    />
+    <h2>{{ github_data.name }}</h2>
+    <p>{{ github_data.login }}</p>
+  </div>
+  <div class="card-body">
+    <p><strong>Bio:</strong> {{ github_data.bio }}</p>
+    <input type="text" #bio (keydown)="onKeyDown(bio.value)" />
+    <p><strong>Company:</strong> {{ github_data.company }}</p>
+    <p><strong>Location:</strong> {{ github_data.location }}</p>
+    <p>
+      <strong>Blog:</strong>
+      <a [href]="'https://' + github_data.blog" target="_blank">{{
+        github_data.blog
+      }}</a>
+    </p>
+    <p>
+      <strong>Twitter:</strong>
+      <a
+        [href]="'https://twitter.com/' + github_data.twitter_username"
+        target="_blank">{{ github_data.twitter_username }}</a
+      >
+    </p>
+    <p><strong>Public Repos:</strong> {{ github_data.public_repos }}</p>
+    <p><strong>Followers:</strong> {{ github_data.followers }}</p>
+    <p><strong>Following:</strong> {{ github_data.following }}</p>
+    <p>
+      <strong>GitHub Profile:</strong>
+      <a [href]="github_data.html_url" target="_blank">{{
+        github_data.html_url
+      }}</a>
+    </p>
+  </div>
+</div>

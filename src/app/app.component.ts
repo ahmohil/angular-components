@@ -1,6 +1,9 @@
-import { Component, ViewChild } from '@angular/core';
-import { HighlitedDirective } from './directives/highlited.directive';
 
+import { Component, ViewChild } from '@angular/core';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { HighlitedDirective } from './directives/highlited.directive';
+import { Observable } from 'rxjs';
+import { TestService } from './services/test.service';
 @Component({
   selector: 'app-rooot',
   templateUrl: './app.component.html',
@@ -11,6 +14,25 @@ export class AppComponent {
     'title' : 'angular-components',
     'customInput': 'This is custom input'
   }
+
+  gh_data$ : Observable<any>;
+  github_data: any;
+  constructor( private testService: TestService, private http: HttpClient) {}
+
+  ngOnInit(){
+    const params = new HttpParams().set('page', '1')
+    .set('pageSize', '10');
+    console.log('Test service', this.testService);
+
+    this.http.get('https://api.github.com/users/ahmohil').subscribe((response) => {
+      console.log('Response', response);
+      this.github_data = response;
+    });
+
+    // this.gh_data$ = this.testService.loadStats();
+
+  }
+
 
   @ViewChild(HighlitedDirective)
   highlighted: HighlitedDirective;
@@ -53,8 +75,7 @@ export class AppComponent {
   }
 
   onKeyUp(value: string) {
-    console.log('Key up event', value);
-    this.data.customInput = value
+    this.github_data.bio = value;
   }
 
   courseCardClicked() {
@@ -72,5 +93,6 @@ export class AppComponent {
   ngAfterViewInit() {
     console.log('Highlighted directive', this.highlighted);
   }
+
 
 }

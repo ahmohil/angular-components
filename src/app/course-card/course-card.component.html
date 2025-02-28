@@ -1,23 +1,19 @@
-<!-- <div class="course-card">
-  <h2>{{ cardIndex}} {{ course.title }}</h2>
-  <p>{{ course.description }}</p>
-  <div class="course-view-btn-div">
-    <button (click)="viewCourseClicked($event)">View Course</button>
-  </div>
-</div> -->
-
 <div *ngIf="course" class="course-card" [ngClass]="{'is-first': cardIndex === 0}">
-  <h2 *ngIf="course.title; else noTitle" [ngStyle]="{'color': cardIndex === 0 ? 'blue' : 'black'}">{{ cardIndex }} {{ course.title }}</h2>
+  <h2 *ngIf="!isEditing; else editTitle" [ngStyle]="{'color': cardIndex === 0 ? 'blue' : 'black'}">{{ cardIndex }} {{ course.title }}</h2>
+  <ng-template #editTitle>
+    <input [(ngModel)]="course.title" [ngStyle]="{'color': cardIndex === 0 ? 'blue' : 'black'}" />
+  </ng-template>
   <p *ngIf="course.description; else noDescription" [ngStyle]="{'font-style': course.description ? 'italic' : 'normal'}">{{ course.description }}</p>
   <div class="course-category" [ngSwitch]="course.category">
     <div *ngSwitchCase="'BEGINNER'">Beginner</div>
     <div *ngSwitchCase="'INTERMEDIATE'">Intermediate</div>
     <div *ngSwitchCase="'ADVANCED'">Advanced</div>
     <div *ngSwitchDefault>Not Available</div>
-
   </div>
   <div class="course-view-btn-div">
     <button (click)="viewCourseClicked($event)" [ngStyle]="{'background-color': cardIndex === 0 ? '#007bff' : '#28a745'}">View Course</button>
+    <button *ngIf="!isEditing" (click)="editTitleClicked()">Edit Title</button>
+    <button *ngIf="isEditing" (click)="saveTitleClicked()">Save Title</button>
   </div>
 </div>
 

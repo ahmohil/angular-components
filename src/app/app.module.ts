@@ -5,19 +5,23 @@ import { AppComponent } from './app.component';
 import { CourseCardComponent } from './course-card/course-card.component';
 import { HighlitedDirective } from './directives/highlited.directive';
 import { NgxUnlessDirective } from './directives/ngx-unless.directive';
-
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { GhStatsComponent } from './gh-stats/gh-stats.component';
+import { TestService } from './services/test.service';
 @NgModule({
   declarations: [
     AppComponent,
     CourseCardComponent,
     HighlitedDirective,
-    NgxUnlessDirective
+    NgxUnlessDirective,
+    GhStatsComponent
   ],
   imports: [
     BrowserModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule,
   ],
-  providers: [],
+  providers: [TestService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

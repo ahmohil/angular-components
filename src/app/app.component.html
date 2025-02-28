@@ -406,6 +406,8 @@
     <span>{{ data.title }} app is running!</span>
     <input [(ngModel)]="data.title" />
 
+    <input #title (keyup)="onKeyUp( title.value)" />
+
     <svg
       id="rocket-smoke"
       xmlns="http://www.w3.org/2000/svg"
@@ -427,7 +429,17 @@
   <span>
     {{ data.customInput }}
   </span>
+
+
+  <!-- Render app-gh-stats only when gh_data$ has data -->
+  <!-- <ng-container *ngIf="gh_data$ | async as githubData"> -->
+    <ng-container *ngIf="github_data as githubData">
+    <app-gh-stats [github_data]="githubData"></app-gh-stats>
+  </ng-container>
+
+  
   <input (keyup)="onKeyUp(titleInput.value)" #titleInput />
+
 
   <!-- Resources -->
   <h2>Resources</h2>
@@ -568,6 +580,10 @@
     <p>Price: {{ price | currency: 'INR'}}</p>
     <!-- <p>Custom Pipe Example: {{ data.title | customPipe }}</p> -->
   </div>
+
+
+
+
 </div>
 
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
