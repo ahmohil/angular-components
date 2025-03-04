@@ -437,7 +437,7 @@
     <app-gh-stats [github_data]="githubData"></app-gh-stats>
   </ng-container>
 
-  
+
   <input (keyup)="onKeyUp(titleInput.value)" #titleInput />
 
 
@@ -539,6 +539,9 @@
       </svg>
     </a>
   </div>
+
+
+  <button (click)="onEditCourse()" i18n>Edit Course</button>
 
   <!--Course Card-->
   <div

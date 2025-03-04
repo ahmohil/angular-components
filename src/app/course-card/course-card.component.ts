@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, OnChanges, SimpleChanges, AfterContentChecked } from '@angular/core';
 import { Course } from './types';
 
 @Component({
@@ -6,7 +6,7 @@ import { Course } from './types';
   templateUrl: './course-card.component.html',
   styleUrls: ['./course-card.component.scss']
 })
-export class CourseCardComponent implements OnInit {
+export class CourseCardComponent implements OnInit, OnChanges, AfterContentChecked {
 
   constructor() { }
 
@@ -24,6 +24,17 @@ export class CourseCardComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log("Changes are", changes)
+    if (changes['course']) {
+      console.log('Course changed:', changes['course'].currentValue);
+    }
+  }
+
+  ngAfterContentChecked(): void {
+    console.log('ngAfterContentChecked called');
+  }
+
   viewCourseClicked(event: Event) {
     console.log('View course clicked');
     this.courseSelected.emit(this.course);
@@ -36,6 +47,8 @@ export class CourseCardComponent implements OnInit {
   saveTitleClicked() {
     this.isEditing = false;
     console.log('Course title saved:', this.course.title);
-    // You can add additional logic here to save the title to a server or perform other actions
-  }
-}
+
+
+
+
+}  }    // You can add additional logic here to save the title to a server or perform other actions

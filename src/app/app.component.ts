@@ -94,5 +94,15 @@ export class AppComponent {
     console.log('Highlighted directive', this.highlighted);
   }
 
+  onEditCourse() {
+    const course = this.courses[1];
+    const newCourse = {
+      ...course,
+      title: 'New title',
+      description: 'New description'
+    }
+    this.courses[1] = newCourse;
+  }
+
 
 }
