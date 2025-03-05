@@ -9,8 +9,7 @@ export class HighlitedDirective {
     console.log("HighlitedDirective created");
   }
 
-  @Input('TS-996008: Component AppComponent is standalone, and cannot be declared in an NgModule. Did you mean to import it instead?
-')
+  @Input('highlighted')
   isHighlighted = true;
 
   @Input()
